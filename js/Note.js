@@ -2,6 +2,7 @@ var Note = React.createClass({
     getInitialState: function() {
         return {editing: false}
     },
+
     edit: function() {
         this.setState({editing: true});
     },
@@ -57,13 +58,13 @@ var Board = React.createClass({
     },
     getInitialState: function() {
         return {
-            notes: [
-                'Now You Can Edit this Note!',
-                'You Can Also Delete!',
-                'Save too!',
-                'Thank You'
-            ]
+            notes: []
         };
+    },
+    add: function(text){
+        var arr = this.state.notes;
+        arr.push(text);
+        this.setState({notes: arr});
     },
     update: function(newText, i) {
         var arr = this.state.notes;
@@ -87,7 +88,9 @@ var Board = React.createClass({
     render: function() {
         return (<div className="board">
             {this.state.notes.map(this.eachNote)}
-        </div>
+            <button className="btn btn-success btn-sm glyphicon glyphicon-plus"
+            onClick={this.add.bind(null,"Add New Note")}/>
+            </div>
 
         );
     }
